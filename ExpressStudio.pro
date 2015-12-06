@@ -49,3 +49,6 @@ DISTFILES += \
     res/menu/flowers.png \
     res/menu/street.png \
     res/menu/tea_time.png
+
+RESOURCES += \
+    res/resources.qrc
