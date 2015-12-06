@@ -2,6 +2,9 @@
 #define MAIN_WINDOW_H
 
 #include <QMainWindow>
+#include <memory>
+
+#include "instrument.h"
 
 namespace Ui {
 class MainWindow;
@@ -18,8 +21,12 @@ public:
 private:
     Ui::MainWindow *ui;
 
+    std::vector<std::unique_ptr<Instrument>> instruments;
+
     void centerWindow();
     void setBackground();
+    void loadInstruments();
+//    void showLabel(QImage& imageToLabel);
 };
 
 #endif // MAIN_WINDOW_H
