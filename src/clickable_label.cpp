@@ -20,11 +20,8 @@ void ClickableLabel::setEnabled(bool enabled) {
     setPixmap(this->enabled ? enabledImage : disabledImage);
 }
 
-void ClickableLabel::changeState() {
-    setEnabled(!enabled);
-}
-
 void ClickableLabel::mouseReleaseEvent(QMouseEvent* event) {
+    setEnabled(!enabled);
     emit clicked(this);
 }
 

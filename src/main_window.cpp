@@ -38,7 +38,6 @@ MainWindow::MainWindow(QWidget *parent) :
         label->setGeometry(rect);
 
         connect(label.get(), &ClickableLabel::clicked, this, &MainWindow::labelClicked);
-        connect(label.get(), &ClickableLabel::clicked, label.get(), &ClickableLabel::changeState);
 
         labels.push_back(std::move(label));
     }

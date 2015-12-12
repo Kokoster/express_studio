@@ -16,9 +16,6 @@ public:
 signals:
     void clicked(ClickableLabel* label);
 
-public slots:
-    void changeState();
-
 protected:
     void setEnabled(bool enabled);
 
