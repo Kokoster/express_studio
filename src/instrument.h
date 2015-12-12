@@ -6,20 +6,31 @@
 #include <QWidget>
 #include <QtMultimedia>
 
-#include "component.h"
 #include "point.h"
 
 //class MainWindow;
 
-class Instrument : public Component
+class Instrument
 {
 public:
-    Instrument(QMainWindow* mainWindow, const std::string& inputEnabledImage,
-               const std::string& inputDisabledImage, const std::string& soundtrack, Point position);
+    Instrument(const std::string& enabledImageName,
+               const std::string& disabledImageName, const std::string& soundtrack, Point position);
+
+    std::string getEnabledImageName()  { return enabledImageName;  }
+    std::string getDisabledImageName() { return disabledImageName; }
+
+    Point getPosition() { return position; }
 
 private:
-    QMediaPlayer* player;
-    std::string soundtrackName;
+    std::string enabledImageName;
+    std::string disabledImageName;
+
+    Point position;
+
+    std::unique_ptr<QMediaPlayer> player;
+//    std::string soundtrackName;
+
+    bool playing;
 };
 
 #endif // INSTRUMENT_H

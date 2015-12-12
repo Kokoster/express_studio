@@ -4,6 +4,8 @@
 #include <QPixmap>
 
 #include "QDesktopWidget"
+#include "clickable_label.h"
+#include "band.h"
 
 const QString BACKGROUND = ":/background/grey_room.jpg";
 const QString BACKGROUND_LOAD = "MainWindow {background-image: url(:/background/grey_room.jpg);}";
@@ -16,37 +18,44 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    setBackground();
-    loadInstruments();
+    initBackground();
+    centerWindow();
 
-//    for (int i = 0; i < (int) instruments.size(); ++i) {
-//        instruments[i]->showLabel();
-//    }
+    band = std::unique_ptr<Band>(new Band(size()));
+
+    const std::vector<std::unique_ptr<Instrument>>& instruments = band->getInstruments();
+    for (int i = 0; i < (int) instruments.size(); ++i) {
+        std::unique_ptr<ClickableLabel> label(new ClickableLabel(this, instruments[i]->getEnabledImageName(),
+                                                                       instruments[i]->getDisabledImageName()));
+        label->setProperty("instrumentIndex", i);
+
+        // set position to label
+        Point position = instruments[i]->getPosition();
+        QRect rect(position.x, position.y,
+                   position.x + label->size().width(),
+                   position.y + label->size().height());
+
+        label->setGeometry(rect);
+
+        connect(label.get(), &ClickableLabel::clicked, this, &MainWindow::labelClicked);
+        connect(label.get(), &ClickableLabel::clicked, label.get(), &ClickableLabel::changeState);
+
+        labels.push_back(std::move(label));
+    }
 }
 
-void MainWindow::loadInstruments() {
-    Point position(size().width() / 8, size().height() / 2);
-    std::unique_ptr<Instrument> guitar(new Instrument(this, ":/instruments/instruments/Guitars/main_guitar/guitar.png",
-                                                      ":/instruments/instruments/Guitars/main_guitar/disabled_guitar.png",
-                                                      ":/tracks/tracks/main_vocal_voice.mp3", position));
-
-    instruments.push_back(std::move(guitar));
+void MainWindow::labelClicked(ClickableLabel *label) {
+    band->toggleInstrument(label->property("instrumentIndex").toInt());
 }
 
-void MainWindow::setBackground() {
+
+void MainWindow::initBackground() {
     setStyleSheet(BACKGROUND_LOAD);
 
     QImage background(BACKGROUND);
     QSize imageSize = background.size();
     setFixedSize(imageSize.width(), imageSize.height());
-    centerWindow();
 }
-
-//void MainWindow::showLabel(QImage& imageToLabel) {
-////    std::unique_ptr<QLabel> label(new QLabel("some text", this));
-//    label->setPixmap(QPixmap::fromImage(imageToLabel));
-//    label->show();
-//}
 
 void MainWindow::centerWindow() {
     QDesktopWidget desktopWindow;

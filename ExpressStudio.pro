@@ -17,12 +17,14 @@ CONFIG += c++11
 SOURCES += src/instrument.cpp \
     src/main.cpp \
     src/main_window.cpp \
-    src/component.cpp
+    src/clickable_label.cpp \
+    src/band.cpp
 
 HEADERS  += src/instrument.h \
     src/main_window.h \
     src/point.h \
-    src/component.h
+    src/clickable_label.h \
+    src/band.h
 
 FORMS    += mainwindow.ui
 

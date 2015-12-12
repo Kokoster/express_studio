@@ -5,6 +5,9 @@
 #include <memory>
 
 #include "instrument.h"
+#include "clickable_label.h"
+
+class Band;
 
 namespace Ui {
 class MainWindow;
@@ -18,15 +21,17 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void labelClicked(ClickableLabel *label);
+
 private:
     Ui::MainWindow *ui;
 
-    std::vector<std::unique_ptr<Instrument>> instruments;
+    std::unique_ptr<Band> band;
+    std::vector<std::unique_ptr<ClickableLabel>> labels;
 
     void centerWindow();
-    void setBackground();
-    void loadInstruments();
-//    void showLabel(QImage& imageToLabel);
+    void initBackground();
 };
 
 #endif // MAIN_WINDOW_H

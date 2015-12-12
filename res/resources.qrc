@@ -5,8 +5,11 @@
     <qresource prefix="/instruments">
         <file>instruments/Guitars/main_guitar/guitar.png</file>
         <file>instruments/Guitars/main_guitar/disabled_guitar.png</file>
+        <file>instruments/Drums/disabled_drums.png</file>
+        <file>instruments/Drums/drums.png</file>
     </qresource>
     <qresource prefix="/tracks">
         <file>tracks/main_vocal_voice.mp3</file>
+        <file>tracks/drums.mp3</file>
     </qresource>
 </RCC>
