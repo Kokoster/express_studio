@@ -14,17 +14,19 @@ TEMPLATE = app
 CONFIG += c++11
 
 
-SOURCES += src/instrument.cpp \
+SOURCES += \
     src/main.cpp \
-    src/main_window.cpp \
-    src/clickable_label.cpp \
-    src/band.cpp
+    src/model/band.cpp \
+    src/model/instrument.cpp \
+    src/view/clickable_label.cpp \
+    src/view/main_window.cpp
 
-HEADERS  += src/instrument.h \
-    src/main_window.h \
-    src/point.h \
-    src/clickable_label.h \
-    src/band.h
+HEADERS  += \
+    src/model/band.h \
+    src/view/main_window.h \
+    src/model/point.h \
+    src/view/clickable_label.h \
+    src/model/instrument.h
 
 FORMS    += mainwindow.ui
 
@@ -50,7 +52,8 @@ DISTFILES += \
     res/menu/city.png \
     res/menu/flowers.png \
     res/menu/street.png \
-    res/menu/tea_time.png
+    res/menu/tea_time.png \
+    src/model
 
 RESOURCES += \
     res/resources.qrc

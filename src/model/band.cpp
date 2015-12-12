@@ -24,7 +24,21 @@ Band::Band(QSize mainWindowSize)
 }
 
 void Band::toggleInstrument(int index) {
+    bool isPlaying = false;
+    for (int i = 0; i < instruments.size(); ++i) {
+        if (instruments[i]->isPlaying()) {
+            isPlaying = true;
+            break;
+        }
+    }
 
+    instruments[index]->toggle();
+
+    if (!isPlaying) {
+        for (int i = 0; i < instruments.size(); ++i) {
+            instruments[i]->restart();
+        }
+    }
 }
 
 std::vector<std::unique_ptr<Instrument>> const& Band::getInstruments() {

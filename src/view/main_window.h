@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <memory>
 
-#include "instrument.h"
+#include "src/model/instrument.h"
 #include "clickable_label.h"
 
 class Band;

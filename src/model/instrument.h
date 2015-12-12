@@ -21,14 +21,19 @@ public:
 
     Point getPosition() { return position; }
 
+    void toggle();
+    void restart();
+
+    bool isPlaying() { return playing; }
+
 private:
     std::string enabledImageName;
     std::string disabledImageName;
 
     Point position;
 
+    std::unique_ptr<QMediaPlaylist> playlist;
     std::unique_ptr<QMediaPlayer> player;
-//    std::string soundtrackName;
 
     bool playing;
 };

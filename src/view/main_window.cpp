@@ -5,7 +5,7 @@
 
 #include "QDesktopWidget"
 #include "clickable_label.h"
-#include "band.h"
+#include "src/model/band.h"
 
 const QString BACKGROUND = ":/background/grey_room.jpg";
 const QString BACKGROUND_LOAD = "MainWindow {background-image: url(:/background/grey_room.jpg);}";
